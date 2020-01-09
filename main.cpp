@@ -89,7 +89,6 @@ typedef struct {
 } riff_chunk;
 
 #define ARRAY_COUNT(a) (sizeof(a)/sizeof(a[0]))
-#define SAMPLE_RATE 16000
 
 int main(int argc, char *argv[])
 {
@@ -98,7 +97,7 @@ int main(int argc, char *argv[])
     int bytes_per_sample = 4;
     int avg_byte_rate = sample_rate * bytes_per_sample * channels;
     int block_align = bytes_per_sample * channels;
-    int sample_count = SAMPLE_RATE * channels;
+    int sample_count = sample_rate * channels;
 
     //--------------------------------------------------------------------------
     // Generate one second of two sine waves, one in each channel (U.S. dial tone)
@@ -113,8 +112,8 @@ int main(int argc, char *argv[])
     const double gain = 0.1;  // 0.0 = silence, 1.0 = max volume
     const double amplitude = INT32_MAX * gain;
     const double tau = 6.28318;  // 2 PI
-    const double ring1 = 350.0 / SAMPLE_RATE;
-    const double ring2 = 440.0 / SAMPLE_RATE;
+    const double ring1 = 350.0 / sample_rate;
+    const double ring2 = 440.0 / sample_rate;
 
     int32_t *samples = (int32_t *)calloc(sample_count, sizeof(samples[0]));
     assert(samples && "memory alloc failed");
